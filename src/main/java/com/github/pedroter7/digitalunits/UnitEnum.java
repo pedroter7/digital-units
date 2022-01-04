@@ -10,6 +10,7 @@ public enum UnitEnum {
 	
 	PIXEL ("px"),
 	CENTIMETER ("cm"),
+	MILLIMETER ("mm"),
 	POINT ("pt"),
 	INCH ("in");
 	
@@ -31,7 +32,7 @@ public enum UnitEnum {
 	 * 
 	 * @return The {@code UnitEnum} that represents the given unit or null if there is no such representation.
 	 */
-	public static UnitEnum findBySymbol(String symbol) {
+	public static UnitEnum getUnit(String symbol) {
 		for (UnitEnum u : values()) {
 			if (u.symbol.equals(symbol)) return u;
 		}

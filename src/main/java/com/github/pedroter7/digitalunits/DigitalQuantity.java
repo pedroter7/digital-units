@@ -88,7 +88,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 		// Allows single char unit symbols such as 'm'
 		String unit = (Character.isLetter(unitChar1.codePointAt(0)) ? unitChar1 : "") + unitChar2;
 		unit = unit.toLowerCase();
-		UnitEnum unitEnum = UnitEnum.findBySymbol(unit);
+		UnitEnum unitEnum = UnitEnum.getUnit(unit);
 		if (unitEnum == null) throw new UnsupportedOperationException(
 				"There is no support for the given measuring unit."
 				+ " The given unit symbol was " + unit);
