@@ -16,7 +16,7 @@ import java.util.Objects;
  * different units will cause a {@link UnsupportedOperationException}. A {@code null} value will
  * cause a {@link NullPointerException}.
  * 
- * @author Pedro T Freidinger
+ * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
  */
 public final class DigitalQuantity implements Serializable, Comparable<DigitalQuantity> {
@@ -63,7 +63,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	 * 
 	 * <p>Since the method {@link Double#valueOf(String)} is used, other types of exception may be thrown.
 	 * 
-	 * @param string A fully qualified quantity in a string.
+	 * @param fullyQualifiedQuantity A fully qualified quantity in a string.
 	 * 
 	 * @return A {@code DigitalQuantity} object created from the given string
 	 */

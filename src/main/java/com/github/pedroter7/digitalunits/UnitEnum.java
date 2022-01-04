@@ -3,7 +3,7 @@ package com.github.pedroter7.digitalunits;
 /**
  * <p>Represents measuring units. Each {@code UnitEnum} has a symbol {@code String} related to it.
  * 
- * @author Pedro T Freidinger
+ * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
  */
 public enum UnitEnum {
