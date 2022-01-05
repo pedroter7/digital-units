@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Locale;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -129,6 +131,48 @@ public class DigitalQuantityTests {
 			DigitalQuantity digitalQuantity2 = new DigitalQuantity(UnitEnum.INCH, 2);
 			assertEquals(true, digitalQuantity1.compareTo(digitalQuantity2) > 0);
 			assertEquals(true, digitalQuantity2.compareTo(digitalQuantity1) < 0);
+		}
+		
+	}
+	
+	@DisplayName("Get human representation String tests")
+	@Nested
+	public class HumanRepresentationTests {
+		
+		@DisplayName("Human representation without space between numerical value and unit symbol")
+		@Test
+		public void getHumanRepresentationWithoutSpace() {
+			String comparisonString = String.format(Locale.getDefault(), "%1$.2f%2$s", 20.55, "cm"); // "20.55cm"
+			DigitalQuantity digitalQuantity = new DigitalQuantity(UnitEnum.CENTIMETER, 20.5522);
+			assertEquals(comparisonString, digitalQuantity.getHumanRepresentation(false));
+		}
+		
+		@DisplayName("Human representation with space between numerical value and unit symbol")
+		@Test
+		public void getHumanRepresentationWithSpace() {
+			String comparisonString = String.format(Locale.getDefault(), "%1$.2f %2$s", -32.53, "in"); // "-32.53 in"
+			DigitalQuantity digitalQuantity = new DigitalQuantity(UnitEnum.INCH, -32.533333);
+			assertEquals(comparisonString, digitalQuantity.getHumanRepresentation(true));
+		}
+		
+		@DisplayName("Human representation with variable number of decimal places")
+		@Test
+		public void getHumanRepresentationWithDecimalPlaces() {
+			String comparisonString1 = String.format(Locale.getDefault(), "%1$.0f%2$s", -32.533, "in"); // "-32in"
+			String comparisonString2 = String.format(Locale.getDefault(), "%1$.5f%2$s", -32.53333, "in"); // "-32.53333in"
+			DigitalQuantity d = new DigitalQuantity(UnitEnum.INCH, -32.53333);
+			assertEquals(comparisonString1, d.getHumanRepresentation(false, 0));
+			assertEquals(comparisonString2, d.getHumanRepresentation(false, 5));
+		}
+		
+		@DisplayName("Human representation with different Locale")
+		@Test
+		public void getHumanRepresentationWithLocale() {
+			String comparisonStringEn = "20.30cm";
+			String comparisonStringPt = "20,30cm";
+			DigitalQuantity d = new DigitalQuantity(UnitEnum.CENTIMETER, 20.30000);
+			assertEquals(comparisonStringEn, d.getHumanRepresentation(false, 2, Locale.ENGLISH));
+			assertEquals(comparisonStringPt, d.getHumanRepresentation(false, 2, new Locale("pt")));
 		}
 		
 	}

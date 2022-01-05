@@ -1,6 +1,7 @@
 package com.github.pedroter7.digitalunits;
 
 import java.io.Serializable;
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -12,9 +13,15 @@ import java.util.Objects;
  * <p>Unless otherwise noted, passing a {@code null} parameter to the constructor or other
  * static method that constructs an object of this class will cause a {@link NullPointerException}.
  * 
- * <p> During comparison of objects of this class, units are never automatically converted. Two
+ * <p>During comparison of objects of this class, units are never automatically converted. Two
  * different units will cause a {@link UnsupportedOperationException}. A {@code null} value will
  * cause a {@link NullPointerException}.
+ * 
+ * <p>The {@code DigitalQuantity#toString()} method will return a {@code String} representing the digital
+ * quantity with the following template: {@code "[unit: x; value: n]"}, where x is the {@code UnitEnum}
+ * symbol String and n is the numerical value of the {@code DigitalQuantity}. One can obtain a
+ * friendly/humanized {@code String} version of this unit by calling one of the 
+ * {@code DigitalQuantity#getHumanRepresentation()} overloads.
  * 
  * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
@@ -107,6 +114,89 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 		if (this.value == o.value) return 0;
 		else if (this.value > o.value) return 1;
 		else return -1;
+	}
+
+	@Override
+	public String toString() {
+		return "[unit: " + this.unit.getSymbol() + "; value: " + this.value + "]";
+	}
+	
+	/**
+	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
+	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * version of the method returns by default the numerical value as a float with
+	 * 2 decimal places.
+	 * 
+	 * <p>The value from {@link Locale#getDefault()} is used to format the String.
+	 * 
+	 * @param useSpace Decides if there should be a space between the numerical value
+	 * and the unit symbol
+	 * @return String representation of {@code this} {@code DigitalQuantity} with the
+	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * numerical value and the unit symbol.
+	 */
+	public String getHumanRepresentation(boolean useSpace) {
+		return getHumanRepresentation(useSpace, 2);
+	}
+	
+	/**
+	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
+	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * version of the method returns by default the numerical value as a float with
+	 * 2 decimal places and allows to define a {@link Locale} for the formatting.
+	 * 
+	 * @param useSpace Decides if there should be a space between the numerical value
+	 * and the unit symbol
+	 * @param locale A {@link Locale} for formatting the {@code String}
+	 * @return String representation of {@code this} {@code DigitalQuantity} with the
+	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * numerical value and the unit symbol and formatted to the given {@code Locale}.
+	 */
+	public String getHumanRepresentation(boolean useSpace, Locale locale) {
+		return getHumanRepresentation(useSpace, 2, locale);
+	}
+	
+	/**
+	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
+	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * version of the method allows setting the numerical value precision, i.e. the 
+	 * number of decimal places.
+	 * 
+	 * <p>The value from {@link Locale#getDefault()} is used to format the String.
+	 * 
+	 * @param useSpace Decides if there should be a space between the numerical value
+	 * and the unit symbol
+	 * @param decimalPlaces The number of decimal places to be used. Any value bellow
+	 * zero is considered to be zero.
+	 * @return String representation of {@code this} {@code DigitalQuantity} with the
+	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * numerical value and the unit symbol.
+	 */
+	public String getHumanRepresentation(boolean useSpace, int decimalPlaces) {
+		Locale locale = Locale.getDefault();
+		return getHumanRepresentation(useSpace, decimalPlaces, locale);
+	}
+	
+	/**
+	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
+	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * version of the method allows setting the numerical value precision, i.e. the 
+	 * number of decimal places, and the {@link Locale} for formatting.
+	 * 
+	 * @param useSpace Decides if there should be a space between the numerical value
+	 * and the unit symbol
+	 * @param decimalPlaces The number of decimal places to be used. Any value bellow
+	 * zero is considered to be zero.
+	 * @param locale A {@link Locale} for formatting the {@code String}
+	 * @return String representation of {@code this} {@code DigitalQuantity} with the
+	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * numerical value and the unit symbol and formatted to the given {@code Locale}.
+	 */
+	public String getHumanRepresentation(boolean useSpace, int decimalPlaces, Locale locale) {
+		decimalPlaces = decimalPlaces < 0 ? 0 : decimalPlaces;
+		String space = useSpace ? " " : "";
+		String formatterString = "%1$." + String.valueOf(decimalPlaces) + "f" + space + "%2$s";
+		return String.format(locale, formatterString, this.value, this.unit.getSymbol());
 	}
 	
 }
