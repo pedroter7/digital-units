@@ -11,7 +11,7 @@ import com.github.pedroter7.digitalunits.UnitEnum;
  * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
  */
-public final class PixelUnitConverter implements UnitConverter {
+final class PixelUnitConverter implements UnitConverter {
 	
 	private final int screenDPI;
 	private final UnitEnum goalUnit = UnitEnum.PIXEL;
