@@ -37,6 +37,9 @@ public final class AwtConverterFactory implements ScreenResolutionBasedUnitConve
 		switch (goalUnit) {
 		case PIXEL:
 			return new PixelUnitConverter(this.screenDpi);
+			
+		case CENTIMETER:
+			return new CentimeterUnitConverter(screenDpi);
 
 		default:
 			throw new UnsupportedOperationException(
