@@ -16,10 +16,10 @@ import com.github.pedroter7.digitalunits.UnitEnum;
  * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
  */
-public final class AwtConverterFactory implements UnitConverterFactory {
+public final class AwtConverterFactory implements ScreenResolutionBasedUnitConverterFactory {
 	
 	private final int screenDpi;
-	
+
 	/**
 	 * <p>Since this factory uses {@link java.awt.Toolkit#getScreenResolution()}
 	 * and {@link java.awt.Toolkit#getDefaultToolkit()} methods, the constructor
@@ -28,6 +28,7 @@ public final class AwtConverterFactory implements UnitConverterFactory {
 	public AwtConverterFactory() {
 		this.screenDpi = Toolkit.getDefaultToolkit().getScreenResolution();;
 	}
+	
 
 	@Override
 	public UnitConverter factory(UnitEnum goalUnit) {
@@ -42,6 +43,12 @@ public final class AwtConverterFactory implements UnitConverterFactory {
 					"The factory " + getClass().getName() + " can not create factory a "
 					+ UnitConverter.class.getName() + " for the goal unit" + goalUnit.getSymbol());
 		}
+	}
+
+
+	@Override
+	public int getScreenResolution() {
+		return this.screenDpi;
 	}
 
 }

@@ -2,8 +2,6 @@ package com.github.pedroter7.digitalunits.converter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.awt.Toolkit;
-
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -18,7 +16,7 @@ public class UnitConverterTests {
 	@Nested
 	public class AwtBasedConverterTests {
 		
-		private final UnitConverterFactory awtFactory = new AwtConverterFactory();
+		private final ScreenResolutionBasedUnitConverterFactory awtFactory = new AwtConverterFactory();
 		
 		@DisplayName("Converting to PIXEL tests")
 		@Nested
@@ -47,7 +45,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("50cm");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+				int dpi = awtFactory.getScreenResolution();
 				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, (50/2.54)*dpi);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
@@ -59,7 +57,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("100mm");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+				int dpi = awtFactory.getScreenResolution();
 				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, (100/25.4)*dpi);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
@@ -71,7 +69,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("250in");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+				int dpi = awtFactory.getScreenResolution();
 				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, 250*dpi);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
@@ -83,7 +81,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("12.01pt");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+				int dpi = awtFactory.getScreenResolution();
 				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, (12.01/72)*dpi);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
@@ -95,7 +93,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("-50.54mm");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				int dpi = Toolkit.getDefaultToolkit().getScreenResolution();
+				int dpi = awtFactory.getScreenResolution();
 				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, -(50.54/25.4)*dpi);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
