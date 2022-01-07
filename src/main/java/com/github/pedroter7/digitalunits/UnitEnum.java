@@ -9,6 +9,7 @@ package com.github.pedroter7.digitalunits;
 public enum UnitEnum {
 	
 	PIXEL ("px"),
+	METER ("m"),
 	CENTIMETER ("cm"),
 	MILLIMETER ("mm"),
 	POINT ("pt"),

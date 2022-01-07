@@ -38,6 +38,18 @@ public class UnitConverterTests {
 				assertEquals(0, converted.compareTo(digitalQuantity));
 			}
 			
+			@DisplayName("Convert from METER")
+			@Test
+			public void convertFromM() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.PIXEL);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("5m");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				int dpi = awtFactory.getScreenResolution();
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.PIXEL, (5/0.0254)*dpi);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
 			@DisplayName("Convert from CENTIMETER")
 			@Test
 			public void convertFromCm() {
@@ -100,6 +112,95 @@ public class UnitConverterTests {
 			
 		}
 		
+		@DisplayName("Converting to METER tests")
+		@Nested
+		public class MeterConvertingTests {
+			
+			@DisplayName("Convert from null")
+			@Test
+			public void convertNull() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				assertEquals(null, converter.convertFrom(null));
+			}
+			
+			@DisplayName("Convert from PIXEL")
+			@Test
+			public void convertFromPixel() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("182px");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				int dpi = awtFactory.getScreenResolution();
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, (182*0.0254)/dpi);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from METER")
+			@Test
+			public void convertFromM() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("5m");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				assertEquals(0, converted.compareTo(digitalQuantity));
+			}
+			
+			@DisplayName("Convert from CENTIMETER")
+			@Test
+			public void convertFromCm() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("50cm");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, 0.50);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from MILLIMETER")
+			@Test
+			public void convertFromMm() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("100mm");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, 0.10);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from INCH")
+			@Test
+			public void convertFromIn() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("250in");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, 250*0.0254);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from POINT")
+			@Test
+			public void convertFromPt() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("12.01pt");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, 12.01 * 0.00035278);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from negative value")
+			@Test
+			public void convertFromNegativeValue() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.METER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("-50.54mm");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.METER, -0.05054);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+		}
+		
 		@DisplayName("Converting to CENTIMETER tests")
 		@Nested
 		public class CentimeterConvertingTests {
@@ -119,7 +220,18 @@ public class UnitConverterTests {
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
 				int dpi = awtFactory.getScreenResolution();
-				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, (182.0/dpi) * 2.54);
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, (182.0*2.54)/dpi);
+				assertEquals(0, converted.compareTo(shouldBe));
+			}
+			
+			@DisplayName("Convert from METER")
+			@Test
+			public void convertFromM() {
+				UnitConverter converter = awtFactory.factory(UnitEnum.CENTIMETER);
+				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("5m");
+				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
+				// Calculate what should be the result
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, 500.0);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
 			
@@ -161,7 +273,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("12.01pt");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, 12.01/28.346);
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, 12.01 * 0.035278);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
 			
@@ -172,7 +284,7 @@ public class UnitConverterTests {
 				DigitalQuantity digitalQuantity = DigitalQuantity.valueOf("-50.54mm");
 				DigitalQuantity converted = converter.convertFrom(digitalQuantity);
 				// Calculate what should be the result
-				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, -50.54/10);
+				DigitalQuantity shouldBe = new DigitalQuantity(UnitEnum.CENTIMETER, -5.054);
 				assertEquals(0, converted.compareTo(shouldBe));
 			}
 			
