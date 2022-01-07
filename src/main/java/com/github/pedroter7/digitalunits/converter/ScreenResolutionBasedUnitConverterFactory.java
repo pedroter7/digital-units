@@ -10,7 +10,8 @@ public interface ScreenResolutionBasedUnitConverterFactory extends UnitConverter
 	/**
 	 * <p>Get the screen resolution in DPIs that was obtained by the
 	 * factory and is currently being used to instantiate {@code UnitConverter} s.
-	 * @return
+	 * 
+	 * @return The screen resolution that was obtained by the implementation.
 	 */
 	public int getScreenResolution();
 

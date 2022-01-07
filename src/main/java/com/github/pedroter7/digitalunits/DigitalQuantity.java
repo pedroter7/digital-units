@@ -131,7 +131,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	
 	/**
 	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
-	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * {@code DigitalQuantity}. The template is [numerical_value][unit_symbol]. This
 	 * version of the method returns by default the numerical value as a float with
 	 * 2 decimal places.
 	 * 
@@ -140,7 +140,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	 * @param useSpace Decides if there should be a space between the numerical value
 	 * and the unit symbol
 	 * @return String representation of {@code this} {@code DigitalQuantity} with the
-	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * template [numerical_value][unit_symbol] containing or not a space between the
 	 * numerical value and the unit symbol.
 	 */
 	public String getHumanRepresentation(boolean useSpace) {
@@ -149,7 +149,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	
 	/**
 	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
-	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * {@code DigitalQuantity}. The template is [numerical_value][unit_symbol]. This
 	 * version of the method returns by default the numerical value as a float with
 	 * 2 decimal places and allows to define a {@link Locale} for the formatting.
 	 * 
@@ -157,7 +157,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	 * and the unit symbol
 	 * @param locale A {@link Locale} for formatting the {@code String}
 	 * @return String representation of {@code this} {@code DigitalQuantity} with the
-	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * template [numerical_value][unit_symbol] containing or not a space between the
 	 * numerical value and the unit symbol and formatted to the given {@code Locale}.
 	 */
 	public String getHumanRepresentation(boolean useSpace, Locale locale) {
@@ -166,7 +166,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	
 	/**
 	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
-	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * {@code DigitalQuantity}. The template is [numerical_value][unit_symbol]. This
 	 * version of the method allows setting the numerical value precision, i.e. the 
 	 * number of decimal places.
 	 * 
@@ -177,7 +177,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	 * @param decimalPlaces The number of decimal places to be used. Any value bellow
 	 * zero is considered to be zero.
 	 * @return String representation of {@code this} {@code DigitalQuantity} with the
-	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * template [numerical_value][unit_symbol] containing or not a space between the
 	 * numerical value and the unit symbol.
 	 */
 	public String getHumanRepresentation(boolean useSpace, int decimalPlaces) {
@@ -187,7 +187,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	
 	/**
 	 * <p>Returns a "humanized" or "friendly" {@code String} representation of this
-	 * {@code DigitalQuantity}. The template is <numerical_value><unit_symbol>. This
+	 * {@code DigitalQuantity}. The template is [numerical_value][unit_symbol]. This
 	 * version of the method allows setting the numerical value precision, i.e. the 
 	 * number of decimal places, and the {@link Locale} for formatting.
 	 * 
@@ -197,7 +197,7 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	 * zero is considered to be zero.
 	 * @param locale A {@link Locale} for formatting the {@code String}
 	 * @return String representation of {@code this} {@code DigitalQuantity} with the
-	 * template <numerical_value><unit_symbol> containing or not a space between the
+	 * template [numerical_value][unit_symbol] containing or not a space between the
 	 * numerical value and the unit symbol and formatted to the given {@code Locale}.
 	 */
 	public String getHumanRepresentation(boolean useSpace, int decimalPlaces, Locale locale) {

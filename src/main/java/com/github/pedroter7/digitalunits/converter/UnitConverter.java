@@ -28,8 +28,8 @@ public interface UnitConverter {
 	public DigitalQuantity convertFrom(DigitalQuantity digitalQuantity);
 	
 	/**
-	 * <p>Get the goal unit that this converter is specialized in
-	 * converting to.
+	 * @return {@code UnitEnum} that this implementation is specialized in
+	 * coverting {@code DigitalQuantity} s to.
 	 */
 	public UnitEnum getGoalUnit();
 	
