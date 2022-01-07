@@ -1,7 +1,5 @@
 package com.github.pedroter7.digitalunits.converter;
 
-import java.util.function.Function;
-
 import com.github.pedroter7.digitalunits.DigitalQuantity;
 import com.github.pedroter7.digitalunits.UnitEnum;
 
@@ -14,33 +12,14 @@ import com.github.pedroter7.digitalunits.UnitEnum;
  * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
  */
-class MeterUnitConverter implements UnitConverter {
-	
-	private final int screenDpi;
-	private final UnitEnum goalUnit = UnitEnum.METER;
+class MeterUnitConverter extends AbstractScreenResolutionBasedUnitConverter {
 	
 	protected MeterUnitConverter(int screenDpi) {
-		this.screenDpi = screenDpi;
+		super(UnitEnum.METER, screenDpi);
 	}
-	
-	private DigitalQuantity create(double value) {
-		return new DigitalQuantity(goalUnit, value);
-	}
-	
-	/**
-	 * <p>Actual conversion happens here.
-	 * 
-	 * @param original The original {@code DigitalQuantity} to be converted
-	 * @param conversionFunction A function that converts the numerical value of the
-	 * original {@code DigitalQuantity} to the meters numerical value equivalent.
-	 * @return The original {@code DigitalQuantity} in meters.
-	 */
-	private DigitalQuantity doConvert(DigitalQuantity original, Function<Double, Double> conversionFunction) {
-		double value = conversionFunction.apply(original.getValue());
-		return create(value);
-	}
-	
-	private DigitalQuantity convert(DigitalQuantity digitalQuantity) {
+
+	@Override
+	protected DigitalQuantity convert(DigitalQuantity digitalQuantity) {
 		UnitEnum fromUnit = digitalQuantity.getUnit();
 		switch (fromUnit) {
 		case PIXEL:
@@ -59,22 +38,9 @@ class MeterUnitConverter implements UnitConverter {
 			return doConvert(digitalQuantity, (Double v) -> v * 0.00035278);
 
 		default:
-			throw new UnsupportedOperationException("The class " + getClass().getName() 
-					+ " does not support conversion from " + fromUnit
-					+ " to " + this.goalUnit.getSymbol());
+			super.throwUnsupportedConversion(this.getClass().getName(), fromUnit);
+			return null;
 		}
-	}
-
-	@Override
-	public DigitalQuantity convertFrom(DigitalQuantity digitalQuantity) {
-		if (digitalQuantity == null) return null;
-		if (digitalQuantity.getUnit() == this.goalUnit) return digitalQuantity;
-		return convert(digitalQuantity);
-	}
-
-	@Override
-	public UnitEnum getGoalUnit() {
-		return goalUnit;
 	}
 
 }

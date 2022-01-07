@@ -43,6 +43,12 @@ public final class AwtConverterFactory implements ScreenResolutionBasedUnitConve
 			
 		case METER:
 			return new MeterUnitConverter(screenDpi);
+			
+		case POINT:
+			return new PointUnitConverter(screenDpi);
+			
+		case INCH:
+			return new InchUnitConverter(screenDpi);
 
 		default:
 			throw new UnsupportedOperationException(
