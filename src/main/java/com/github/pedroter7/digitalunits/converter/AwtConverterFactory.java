@@ -41,6 +41,9 @@ public final class AwtConverterFactory implements ScreenResolutionBasedUnitConve
 		case CENTIMETER:
 			return new CentimeterUnitConverter(screenDpi);
 			
+		case MILLIMETER:
+			return new MillimiterUnitConverter(screenDpi);
+			
 		case METER:
 			return new MeterUnitConverter(screenDpi);
 			
@@ -52,8 +55,8 @@ public final class AwtConverterFactory implements ScreenResolutionBasedUnitConve
 
 		default:
 			throw new UnsupportedOperationException(
-					"The factory " + getClass().getName() + " can not create factory a "
-					+ UnitConverter.class.getName() + " for the goal unit" + goalUnit.getSymbol());
+					"The factory " + getClass().getName() + " can not factory a "
+					+ UnitConverter.class.getName() + " for the goal unit " + goalUnit.getSymbol());
 		}
 	}
 
