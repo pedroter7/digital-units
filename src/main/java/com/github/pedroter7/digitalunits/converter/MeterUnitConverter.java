@@ -19,7 +19,7 @@ class MeterUnitConverter implements UnitConverter {
 	private final int screenDpi;
 	private final UnitEnum goalUnit = UnitEnum.METER;
 	
-	public MeterUnitConverter(int screenDpi) {
+	protected MeterUnitConverter(int screenDpi) {
 		this.screenDpi = screenDpi;
 	}
 	
