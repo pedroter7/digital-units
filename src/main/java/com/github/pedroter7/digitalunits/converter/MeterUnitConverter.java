@@ -4,7 +4,7 @@ import com.github.pedroter7.digitalunits.DigitalQuantity;
 import com.github.pedroter7.digitalunits.UnitEnum;
 
 /**
- * <p>An UnitConverter implementation to convert units to meters.
+ * <p>An UnitConverter implementation to convert a {@code DigitalQuantity} to meters.
  * 
  * <p>This class is meant to be used as base to any multiple of meter
  * conversions, thus it is not declared as final.

@@ -4,7 +4,7 @@ import com.github.pedroter7.digitalunits.DigitalQuantity;
 import com.github.pedroter7.digitalunits.UnitEnum;
 
 /**
- * <p>An UnitConverter implementation to convert units to centimeters.
+ * <p>An UnitConverter implementation to convert a {@code DigitalQuantity} to centimeters.
  * 
  * @author Pedro T Freidinger (pedrotersetti3@gmail.com)
  * @since 1.0
