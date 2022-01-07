@@ -5,19 +5,32 @@
  
     <groupId>com.github.pedroter7</groupId>
     <artifactId>digital-units</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0</version>
     <packaging>jar</packaging>
  
     <name>digital-unit-converter</name>
     <description>A small library to wrap quantities, such as cm, px, in, etc... And deal with them.</description>
-    <url>https://github.com/pedroter7/digital-units</url>
+    <scm>
+    	<url>https://github.com/pedroter7/digital-units</url>
+    </scm>
+    
+    <developers>
+    	<developer>
+    		<name>Pedro Tersetti Freidinger</name>
+    		<email>pedrotersetti3@gmail.com</email>
+    		<url>https://github.com/pedroter7</url>
+    		<roles>
+    			<role>Owner</role>
+    			<role>Developer</role>
+    		</roles>
+    	</developer>
+    </developers>
  
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
-        <maven.compiler.release>${java.version}</maven.compiler.release>
 
         <junit.version>5.8.2</junit.version>
         
@@ -55,6 +68,15 @@
     </dependencies>
     
     <build>
+    	<resources>
+    		<resource>
+    			<directory>${project.basedir}</directory>
+    			<includes>
+    				<include>LICENSE</include>
+    			</includes>
+    			<targetPath>META-INF</targetPath>
+    		</resource>
+    	</resources>
         <plugins>
             <plugin>
                 <artifactId>maven-clean-plugin</artifactId>
@@ -67,6 +89,12 @@
             <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven.compiler.version}</version>
+                <configuration>
+                	<source>${java.version}</source>
+                	<target>${java.version}</target>
+                	<showDeprecation>true</showDeprecation>
+                	<showWarnings>true</showWarnings>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -75,6 +103,20 @@
             <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>${maven.jar.version}</version>
+                <configuration>
+                	<archive>
+                		<manifest>
+                			<addClasspath>true</addClasspath>
+                			<classpathPrefix>lib/</classpathPrefix>
+                		</manifest>
+                		<manifestEntries>
+                			<Repository>${project.scm.url}</Repository>
+                			<Release>${project.version}</Release>
+                			<Project-Name>${project.name}</Project-Name>
+                			<Project-Description>${project.description}</Project-Description>
+                		</manifestEntries>
+                	</archive>
+                </configuration>
             </plugin>
             <plugin>
                 <artifactId>maven-install-plugin</artifactId>
@@ -83,6 +125,9 @@
             <plugin>
             	<artifactId>maven-javadoc-plugin</artifactId>
             	<version>${maven.javadoc.version}</version>
+            	<configuration>
+            		<reportOutputDirectory>${project.build.directory}/apidocs</reportOutputDirectory>
+            	</configuration>
             </plugin>
         </plugins>
     </build>
