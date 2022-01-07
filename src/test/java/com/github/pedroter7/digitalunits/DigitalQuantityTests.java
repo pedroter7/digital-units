@@ -30,10 +30,12 @@ public class DigitalQuantityTests {
 			DigitalQuantity digitalQuantityIntString = DigitalQuantity.valueOf("15px");
 			DigitalQuantity digitalQuantitySpacedString = DigitalQuantity.valueOf("  366      in    ");
 			DigitalQuantity digitalQuantityNegativeValue = DigitalQuantity.valueOf("-55cm");
+			DigitalQuantity digitalQuantityMeters = DigitalQuantity.valueOf("144m");
 			assertNotNull(digitalQuantitySpacedString);
 			assertNotNull(digitalQuantityDoubleString);
 			assertNotNull(digitalQuantityIntString);
 			assertNotNull(digitalQuantityNegativeValue);
+			assertNotNull(digitalQuantityMeters);
 			assertEquals(UnitEnum.CENTIMETER, digitalQuantityDoubleString.getUnit());
 			assertEquals(145.20, digitalQuantityDoubleString.getValue());
 			assertEquals(UnitEnum.PIXEL, digitalQuantityIntString.getUnit());
@@ -42,6 +44,8 @@ public class DigitalQuantityTests {
 			assertEquals(366, digitalQuantitySpacedString.getValue());
 			assertEquals(UnitEnum.CENTIMETER, digitalQuantityNegativeValue.getUnit());
 			assertEquals(-55, digitalQuantityNegativeValue.getValue());
+			assertEquals(UnitEnum.METER, digitalQuantityMeters.getUnit());
+			assertEquals(144, digitalQuantityMeters.getValue());
 		}
 		
 		@DisplayName("Test directly creating a DigitalQuantity with null UnitEnum")

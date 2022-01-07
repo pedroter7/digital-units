@@ -1,6 +1,8 @@
 package com.github.pedroter7.digitalunits;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -9,6 +11,9 @@ import java.util.Objects;
  * 
  * <p>For example, instead of having a string saying <i>"15 cm"</i>, this class can be used
  * to have the value 15 and the unit <i>"cm"</i> encapsulated and accessed through an object.
+ * 
+ * <p>To try to prevent bit overflow issues, the numerical value has its precision set to 8
+ * decimal places.
  * 
  * <p>Unless otherwise noted, passing a {@code null} parameter to the constructor or other
  * static method that constructs an object of this class will cause a {@link NullPointerException}.
@@ -36,6 +41,9 @@ public final class DigitalQuantity implements Serializable, Comparable<DigitalQu
 	public DigitalQuantity(UnitEnum unit, double value) {
 		Objects.requireNonNull(unit, "To create a new DigitalQuantity, unit can't be null.");
 		this.unit = unit;
+		// Set precision to 8 to try to prevent overflow issues
+		MathContext mathContext = new MathContext(8);
+		value = new BigDecimal(value, mathContext).doubleValue();
 		this.value = value;
 	}
 
